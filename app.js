@@ -24,7 +24,14 @@ app.set("view engine", "ejs");
 // Routes
 // Imports and uses routes defined in the 'index' and 'todo' files
 app.use(require("./routes/index"));
+// When user visits homepage (GET /):
+// → routes/index.js handles it
+// → Fetches todos from MongoDB
+// → Renders index.ejs with todos
 app.use(require("./routes/todo"));
+// Handles todo operations like:
+// POST /add/todo → Create new todo
+// GET /delete/todo/:id → Delete a todo
 
 // Server configuration
 // Starts the server and listens on port 3000, logs a message when the server starts
