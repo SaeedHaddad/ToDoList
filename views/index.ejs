@@ -1,24 +1,49 @@
+<!-- Include the header partial template -->
 <%- include("./partials/header") %>
+
+<!-- Navigation bar using Bootstrap classes -->
 <nav class="navbar bg-body-tertiary">
     <div class="container-fluid">
+      <!-- App title/brand that links to home page -->
       <a class="navbar-brand" href="/">To Do App</a>
     </div>
-  </nav>
+</nav>
 
+<!-- Main container with top margin -->
 <div class="container mt-5">
-    <form action="/add/todo" method ="POST" class ="d-flex">
-        <input type="text" name="todo" class="form-control" placeholder="Enter">
-        <input type="submit" value="Add Todo" class="btn btn-md btn-primary mx-2">
+    <!-- Form to add new todos -->
+    <!-- POST request will be sent to /add/todo route -->
+    <form action="/add/todo" method="POST" class="d-flex">
+        <!-- Text input field for new todo -->
+        <input 
+            type="text" 
+            name="todo" 
+            class="form-control" 
+            placeholder="Enter">
+        
+        <!-- Submit button with Bootstrap styling -->
+        <input 
+            type="submit" 
+            value="Add Todo" 
+            class="btn btn-md btn-primary mx-2">
     </form>
+
+    <!-- List container for todos with top and bottom margin -->
     <ul class="list-group my-5">
+        <!-- EJS forEach loop to iterate through all todos -->
         <% todo.forEach(todos =>{ %>
-            <li class="list-group-item"> <%= todos.todo %><a href="/delete/todo/<%= todos._id %>" class="btn btn-danger btn-sm">Delete</a>
+            <!-- List item for each todo -->
+            <li class="list-group-item">
+                <!-- Display the todo text -->
+                <%= todos.todo %>
+                
+                <!-- Delete button that links to delete route with todo's ID -->
+                <a href="/delete/todo/<%= todos._id %>" 
+                   class="btn btn-danger btn-sm">Delete</a>
             </li>
-            <% }) %>
-     
-      </ul>
-</div>  
+        <% }) %>
+    </ul>
+</div>
 
-
-
+<!-- Include the footer partial template -->
 <%- include("./partials/footer") %>

@@ -1,29 +1,31 @@
-//including
-const express = require("express");
-const mongoose = require("mongoose"); // to connect to the database
+// Including necessary modules
+const express = require("express"); // Express framework for Node.js
+const mongoose = require("mongoose"); // Mongoose library to connect to MongoDB
 
-//initialize app using express module
-
+// Initialize the app using the express module
 const app = express();
 
-//connection to mongodb
-
+// Connect to MongoDB using Mongoose
 mongoose.connect("mongodb://localhost/todo_express", {
-  //   useNewUrlParser: true,
-  //   useUnifiedTopology: true, //what is this??????
+  // useNewUrlParser: true, // Optional: enables the new MongoDB connection string parser
+  // useUnifiedTopology: true, // Optional: uses the new MongoDB server discovery and monitoring engine
 });
 
-//middlewares
-//a body parser now comes integrated with expressjs
-
+// Middlewares
+// Parses incoming requests with URL-encoded payloads (form data)
 app.use(express.urlencoded({ extended: true }));
+
+// Serves static files from the 'public' directory
 app.use(express.static("public"));
+
+// Sets 'ejs' as the view engine for rendering HTML templates
 app.set("view engine", "ejs");
 
-//routes
+// Routes
+// Imports and uses routes defined in the 'index' and 'todo' files
 app.use(require("./routes/index"));
 app.use(require("./routes/todo"));
 
-//server configurations
-
+// Server configuration
+// Starts the server and listens on port 3000, logs a message when the server starts
 app.listen(3000, () => console.log("Server Started listening on Port:3000"));
