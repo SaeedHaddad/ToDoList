@@ -1,9 +1,15 @@
 // Including necessary modules
 const express = require("express"); // Express framework for Node.js
 const mongoose = require("mongoose"); // Mongoose library to connect to MongoDB
+const authRoutes = require("./routes/auth");
+const protectedRoute = require("./routes/protectedRoute");
+const bcrypt = require("bcrypt");
 
 // Initialize the app using the express module
 const app = express();
+app.use(express.json());
+app.use("/auth", authRoutes);
+app.use("/protected", protectedRoute);
 
 // Connect to MongoDB using Mongoose
 mongoose.connect("mongodb://localhost/todo_express", {
